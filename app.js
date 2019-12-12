@@ -49,14 +49,8 @@ App.post("/client/transfer", async (req, res) => {
   plataforma = plataforma.addCliente(client1);
   plataforma = plataforma.addCliente(client2);
 
-  // Realizando operações que adicionam os clientes e efetua a transferencia baseado
-  // nas informações contidadas no cliente1 e cliente2
   await engine.addOperation(new Operation("addCliente", client1, plataforma));
   await engine.addOperation(new Operation("addCliente", client2, plataforma));
-
-  console.log(plataforma);
-  console.log(engine);
-
   
   await engine.addOperation(
     new Operation(
@@ -66,28 +60,20 @@ App.post("/client/transfer", async (req, res) => {
     )
   );
 
-  console.log('1');
-
-  // Executando a proxima etapa, no modelo FIFO, First In, First Out
   await engine.executeNext();
   await engine.executeNext();
   const engineNext = await engine.executeNext();
 
-  console.log('1');
 
-  // Atualizando plataforma
   const plataforma1 = await engineNext.getPlataforma();
 
-  console.log('1');
 
-  // Buscando cliente na plataforma com seu estado atualizado
   const novoCliente1 = plataforma1.getCliente({ email: client1.email });
   const novoCliente2 = plataforma1.getCliente({ email: client2.email });
 
   console.log(novoCliente1.saldo);
   console.log(novoCliente2.saldo);
 
-  // Respondendo ao expect do teste
   res.status(200).json({
     data: {
       client1: { email: novoCliente1.email, saldo: novoCliente1.saldo },
