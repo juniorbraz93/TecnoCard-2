@@ -43,13 +43,21 @@ App.post("/client/transfer", async (req, res) => {
   const client1 = await req.body.client1;
   const client2 = await req.body.client2;
 
-  console.log(client1);
-  console.log(client2);
+  console.log(client1.email);
+  console.log(client2.email);
+
+  plataforma = plataforma.addCliente(client1);
+  plataforma = plataforma.addCliente(client2);
 
   // Realizando operações que adicionam os clientes e efetua a transferencia baseado
   // nas informações contidadas no cliente1 e cliente2
   await engine.addOperation(new Operation("addCliente", client1, plataforma));
   await engine.addOperation(new Operation("addCliente", client2, plataforma));
+
+  console.log(plataforma);
+  console.log(engine);
+
+  
   await engine.addOperation(
     new Operation(
       "transfer",
@@ -58,13 +66,19 @@ App.post("/client/transfer", async (req, res) => {
     )
   );
 
+  console.log('1');
+
   // Executando a proxima etapa, no modelo FIFO, First In, First Out
   await engine.executeNext();
   await engine.executeNext();
   const engineNext = await engine.executeNext();
 
+  console.log('1');
+
   // Atualizando plataforma
   const plataforma1 = await engineNext.getPlataforma();
+
+  console.log('1');
 
   // Buscando cliente na plataforma com seu estado atualizado
   const novoCliente1 = plataforma1.getCliente({ email: client1.email });
