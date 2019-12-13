@@ -3,6 +3,7 @@ class Cliente {
     this.email = email;
     this.saldo = saldo;
     this.creditoCartao = creditoCartao;
+    this.history = [];
   }
 
   saldoCliente() {
