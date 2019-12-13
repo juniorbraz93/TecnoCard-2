@@ -28,34 +28,9 @@ test("Recuperar dados do cliente", done => {
     );
 });
 
-test("route transfer", done => {
+test("transfer", done => {
   const cliente1 = new Clientes("jb@gmail.com", 100, "1234567890");
-  const cliente2 = new Clientes("fb@gmail.com", 100, "0987654321");
-
-  request(app)
-    .post("/client")
-    .set("Content-Type", "application/json")
-    .send({ email: "jb@gmail.com", cardNumber: "1234567890" })
-    .expect(
-      201,
-      {
-        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
-      },
-      done
-    );
-    request(app)
-    .post("/client")
-    .set("Content-Type", "application/json")
-    .send({ email: "jb@gmail.com", cardNumber: "1234567890" })
-    .expect(
-      201,
-      {
-        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
-      },
-      done
-    );
-
-  
+  const cliente2 = new Clientes("fb@gmail.com", 100, "0987654321"); 
 
   request(app)
     .post("/client/transfer")

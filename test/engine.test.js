@@ -37,10 +37,7 @@ test("Run", async () => {
   await engine.executeNext();
   const engineNext = await engine.executeNext();
 
-  console.log(engineNext);
-
   plataforma = await engineNext.getPlataforma();
-  console.log(plataforma);
 
   const novoCliente1 = plataforma.getCliente({ email: cliente1.email });
   const novoCliente2 = plataforma.getCliente({ email: cliente2.email });
