@@ -65,8 +65,6 @@ test("TesteHashMap", () => {
   let cliente1 = {};
   cliente1["hasmap"] = {};
   cliente1.hasmap["dez"] = 10;
-
-  console.log(cliente1.hasmap["dez"]);
 });
 
 test("exercicio", () => {
@@ -74,6 +72,4 @@ test("exercicio", () => {
   cliente1["hasmap"] = {};
   cliente1.hasmap["dez"] = {};
   cliente1.hasmap.dez["cem"] = 100;
-
-  console.log(cliente1.hasmap.dez["cem"]);
 });

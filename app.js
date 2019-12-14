@@ -43,19 +43,19 @@ App.post("/client/transfer", async (req, res) => {
   const client1 = await req.body.client1;
   const client2 = await req.body.client2;
 
-  console.log(client1.email);
-  console.log(client2.email);
-
   plataforma = plataforma.addCliente(client1);
   plataforma = plataforma.addCliente(client2);
 
-  await engine.addOperation(new Operation("addCliente", client1, plataforma));
-  await engine.addOperation(new Operation("addCliente", client2, plataforma));
-  
+  const cliente1 = plataforma.getCliente({ email: client1.email });
+  const cliente2 = plataforma.getCliente({ email: client2.email });
+
+  await engine.addOperation(new Operation("addCliente", cliente1, plataforma));
+  await engine.addOperation(new Operation("addCliente", cliente2, plataforma));
+
   await engine.addOperation(
     new Operation(
       "transfer",
-      { clientEmail1: client1.email, clientEmail2: client2.email, valor: 60 },
+      { clientEmail1: cliente1.email, clientEmail2: cliente2.email, valor: 60 },
       plataforma
     )
   );
