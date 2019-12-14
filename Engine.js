@@ -33,6 +33,14 @@ class Engine {
     this.history = [];
   }
 
+  addHistory(plataforma, email, histore){
+    const cliente = plataforma.getCliente({ email: email})
+
+    cliente.history.push(histore)
+
+
+  }
+
   async operate(operation) {
     switch (operation.name) {
       case "addCliente":
@@ -45,7 +53,25 @@ class Engine {
           clientEmail2: operation.payload.clientEmail2,
           valor: operation.payload.valor
         });
+
+        this.addHistory(this.plataforma,  operation.payload.clientEmail1, {
+          date: new Date(),
+          to: operation.payload.clientEmail2,
+          valor: operation.payload.valor,
+          type: "Debito"          
+        });
+
+        this.addHistory(this.plataforma, operation.payload.clientEmail2, {
+          date: new Date(),
+          from: operation.payload.clientEmail1,
+          valor: operation.payload.valor,
+          type: "Credito"
+        });
+
+
         this.history.push(this.plataforma);
+
+        
         return this;
 
       default:
