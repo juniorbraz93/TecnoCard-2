@@ -1,40 +1,63 @@
-const App = require("../app.js");
-const Request = require("supertest");
+const app = require("../app.js");
+const request = require("supertest");
 const Clientes = require("../clientes");
 
 test("Recuperar dados do cliente", done => {
-  Request(App)
+  request(app)
     .post("/client")
     .set("Content-Type", "application/json")
-    .send({ email: "rafael@gmail.com", cardNumber: "4444555566667777" })
+    .send({ email: "jb@gmail.com", cardNumber: "1234567890" })
     .expect(
       201,
       {
-        data: { email: "rafael@gmail.com", cardNumber: "4444555566667777" }
+        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
       },
       done
     );
 
-  Request(App)
+  request(app)
     .post("/client/get")
     .set("Content-Type", "application/json")
-    .send({ email: "rafael@gmail.com" })
+    .send({ email: "jb@gmail.com" })
     .expect(
       200,
       {
-        data: { email: "rafael@gmail.com", cardNumber: "4444555566667777" }
+        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
       },
       done
     );
 });
 
 test("route transfer", done => {
-  //Criando clientes na instancia de clientes
   const cliente1 = new Clientes("jb@gmail.com", 100, "1234567890");
-
   const cliente2 = new Clientes("fb@gmail.com", 100, "0987654321");
 
-  Request(App)
+  request(app)
+    .post("/client")
+    .set("Content-Type", "application/json")
+    .send({ email: "jb@gmail.com", cardNumber: "1234567890" })
+    .expect(
+      201,
+      {
+        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
+      },
+      done
+    );
+    request(app)
+    .post("/client")
+    .set("Content-Type", "application/json")
+    .send({ email: "jb@gmail.com", cardNumber: "1234567890" })
+    .expect(
+      201,
+      {
+        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
+      },
+      done
+    );
+
+  
+
+  request(app)
     .post("/client/transfer")
     .set("Content-Type", "application/json")
     .send({
