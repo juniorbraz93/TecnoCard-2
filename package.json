@@ -1,17 +1,18 @@
 {
-  "name": "TecnoCard",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "jest": "^24.9.0",
-    "supertest": "^4.0.2"
-  }
+	"name": "TecnoCard",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest",
+		"start": "node index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1",
+		"jest": "^24.9.0",
+		"supertest": "^4.0.2"
+	}
 }

@@ -13,11 +13,11 @@ test("Recuperar dados do cliente", done => {
   request(app)
     .post("/client")
     .set("Content-Type", "application/json")
-    .send({ email: "jb@gmail.com", cardNumber: "1234567890" })
+    .send({ email: "jb@gmail.com", saldo: 100, cardNumber: "1234567890" })
     .expect(
       201,
       {
-        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
+        data: { email: "jb@gmail.com", saldo: 100, cardNumber: "1234567890" }
       },
       done
     );
@@ -29,7 +29,7 @@ test("Recuperar dados do cliente", done => {
     .expect(
       200,
       {
-        data: { email: "jb@gmail.com", cardNumber: "1234567890" }
+        data: { email: "jb@gmail.com", saldo: 100, cardNumber: "1234567890" }
       },
       done
     );
