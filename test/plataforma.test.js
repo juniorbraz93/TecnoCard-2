@@ -14,7 +14,6 @@ test("hashMap", () => {
   const cliente1 = {};
   cliente1["1"] = 100;
   cliente1["1"] = 50;
-  console.log(cliente1);
 });
 
 test("Plataforma", () => {

@@ -25,7 +25,8 @@ App.post("/client", async (req, res) => {
   res.status(201).json({
     data: {
       email: novoCliente.email,
-      cardNumber: novoCliente.creditoCartao
+      saldo: novoCliente.saldo,
+      cardNumber: novoCliente.creditoCartao,
     }
   });
 });
@@ -35,7 +36,7 @@ App.post("/client/get", async (req, res) => {
   const retorno = newGetPlataforma.getCliente({ email: req.body.email });
 
   res.status(200).json({
-    data: { email: retorno.email, cardNumber: retorno.creditoCartao }
+    data: { email: retorno.email, saldo: retorno.saldo, cardNumber: retorno.creditoCartao }
   });
 });
 
